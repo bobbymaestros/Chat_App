@@ -6,6 +6,7 @@ import 'package:chat_app/Pages/Login_Screen.dart';
 import 'package:chat_app/Pages/Search_Screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CupertinoColors.lightBackgroundGray,
       appBar: AppBar(
           actions: [
             IconButton(
@@ -74,18 +76,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               ConnectionState.done) {
                             if (userData.data != null) {
                               UserModel targetUser = userData.data as UserModel;
-
                               return Container(
-                                margin: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 decoration: BoxDecoration(
-                                    color: Colors.grey[200],
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 10, color: Colors.grey)
+                                    ],
+                                    color: Colors.white,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
-                                child: Dismissible(behavior: HitTestBehavior.opaque,
+                                child: Dismissible(
+                                  behavior: HitTestBehavior.opaque,
                                   key: Key(widget.firebaseUser.uid),
                                   // Unique key for each item
                                   background: Container(
-                                    color: Colors.red.shade300,
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
                                     // Background color when swiping
                                     alignment: Alignment.centerRight,
                                     padding:
